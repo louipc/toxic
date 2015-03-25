@@ -175,7 +175,7 @@ struct ToxWindow {
 /* statusbar info holder */
 struct StatusBar {
     WINDOW *topline;
-    char statusmsg[TOX_MAX_STATUSMESSAGE_LENGTH + 1];
+    char statusmsg[TOX_MAX_STATUS_MESSAGE_LENGTH + 1];
     uint16_t statusmsg_len;
     char nick[TOXIC_MAX_NAME_LENGTH + 1];
     int nick_len;

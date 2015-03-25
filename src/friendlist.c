@@ -374,7 +374,7 @@ static void friendlist_onStatusChange(ToxWindow *self, Tox *m, int32_t num, uint
 
 static void friendlist_onStatusMessageChange(ToxWindow *self, int32_t num, const char *status, uint16_t len)
 {
-    if (len > TOX_MAX_STATUSMESSAGE_LENGTH || num >= Friends.max_idx)
+    if (len > TOX_MAX_STATUS_MESSAGE_LENGTH || num >= Friends.max_idx)
         return;
 
     snprintf(Friends.list[num].statusmsg, sizeof(Friends.list[num].statusmsg), "%s", status);
@@ -933,11 +933,11 @@ static void friendlist_onDraw(ToxWindow *self, Tox *m)
 
                 /* Reset Friends.list[f].statusmsg on window resize */
                 if (fix_statuses) {
-                    char statusmsg[TOX_MAX_STATUSMESSAGE_LENGTH];
+                    char statusmsg[TOX_MAX_STATUS_MESSAGE_LENGTH];
 
                     pthread_mutex_lock(&Winthread.lock);
                     int s_len = tox_get_status_message(m, Friends.list[f].num, (uint8_t *) statusmsg,
-                                                       TOX_MAX_STATUSMESSAGE_LENGTH);
+                                                       TOX_MAX_STATUS_MESSAGE_LENGTH);
                     pthread_mutex_unlock(&Winthread.lock);
 
                     filter_str(statusmsg, s_len);

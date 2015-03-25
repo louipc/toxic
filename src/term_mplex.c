@@ -71,7 +71,7 @@ static bool auto_away_active = false;
 
 static mplex_status mplex = MPLEX_NONE;
 static TOX_USERSTATUS prev_status = TOX_USERSTATUS_NONE;
-static char prev_note [TOX_MAX_STATUSMESSAGE_LENGTH] = "";
+static char prev_note [TOX_MAX_STATUS_MESSAGE_LENGTH] = "";
 
 /* mutex for access to status data, for sync between:
    - user command /status from ncurses thread
