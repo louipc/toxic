@@ -179,7 +179,7 @@ struct StatusBar {
     uint16_t statusmsg_len;
     char nick[TOXIC_MAX_NAME_LENGTH + 1];
     int nick_len;
-    uint8_t status;
+    TOX_USER_STATUS status;
     bool is_online;
 };
 
