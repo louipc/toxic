@@ -88,7 +88,8 @@ void cmd_accept(WINDOW *window, ToxWindow *self, Tox *m, int argc, char (*argv)[
 void cmd_add_helper(ToxWindow *self, Tox *m, char *id_bin, char *msg)
 {
     const char *errmsg;
-    int32_t f_num = tox_add_friend(m, (uint8_t *) id_bin, (uint8_t *) msg, (uint16_t) strlen(msg));
+    TOX_ERR_FRIEND_ADD error;
+    int32_t f_num = tox_friend_add(m, (uint8_t *) id_bin, (uint8_t *) msg, (uint16_t) strlen(msg), &error);
 
     switch (f_num) {
         case TOX_FAERR_TOOLONG:
