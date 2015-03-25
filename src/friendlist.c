@@ -470,7 +470,7 @@ static void friendlist_onFileSendRequest(ToxWindow *self, Tox *m, int32_t num, u
         if (get_num_active_windows() < MAX_WINDOWS_NUM) {
             Friends.list[num].chatwin = add_window(m, new_chat(m, Friends.list[num].num));
         } else {
-            tox_file_send_control(m, num, 1, filenum, TOX_FILECONTROL_KILL, 0, 0);
+            tox_file_control(m, num, filenum, TOX_FILE_CONTROL_CANCEL, NULL);
 
             char nick[TOX_MAX_NAME_LENGTH];
             get_nick_truncate(m, nick, num);

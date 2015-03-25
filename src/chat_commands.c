@@ -65,7 +65,7 @@ void cmd_cancelfile(WINDOW *window, ToxWindow *self, Tox *m, int argc, char (*ar
         char name[MAX_STR_SIZE];
         get_file_name(name, sizeof(name), filepath);
         line_info_add(self, NULL, NULL, NULL, SYS_MSG, 0, 0, "File transfer for '%s' canceled.", name);
-        chat_close_file_receiver(m, filenum, self->num, TOX_FILECONTROL_KILL);
+        chat_close_file_receiver(m, filenum, self->num);
         return;
     } else if (strcasecmp(inoutstr, "out") == 0) {    /* cancel an outgoing file transfer */
         int i;
@@ -86,7 +86,7 @@ void cmd_cancelfile(WINDOW *window, ToxWindow *self, Tox *m, int argc, char (*ar
         const char *filename = file_senders[i].filename;
         char msg[MAX_STR_SIZE];
         snprintf(msg, sizeof(msg), "File transfer for '%s' canceled.", filename);
-        close_file_sender(self, m, i, msg, TOX_FILECONTROL_KILL, filenum, self->num);
+        close_file_sender(self, m, i, msg, filenum, self->num);
         return;
     } else {
         line_info_add(self, NULL, NULL, NULL, SYS_MSG, 0, 0, "Type must be 'in' or 'out'.");
@@ -176,7 +176,8 @@ void cmd_savefile(WINDOW *window, ToxWindow *self, Tox *m, int argc, char (*argv
 
     const char *filename = Friends.list[self->num].file_receiver[filenum].filename;
 
-    if (tox_file_send_control(m, self->num, 1, filenum, TOX_FILECONTROL_ACCEPT, 0, 0) == 0) {
+    TOX_ERR_FILE_CONTROL err;
+    if (tox_file_control(m, self->num, filenum, TOX_FILE_CONTROL_RESUME, &err) == 0) {
         line_info_add(self, NULL, NULL, NULL, SYS_MSG, 0, 0, "Saving file [%d] as: '%s'", filenum, filename);
 
         /* prep progress bar line */
@@ -187,7 +188,7 @@ void cmd_savefile(WINDOW *window, ToxWindow *self, Tox *m, int argc, char (*argv
 
         if ((Friends.list[self->num].file_receiver[filenum].file = fopen(filename, "a")) == NULL) {
             line_info_add(self, NULL, NULL, NULL, SYS_MSG, 0, RED, "* Error writing to file.");
-            tox_file_send_control(m, self->num, 1, filenum, TOX_FILECONTROL_KILL, 0, 0);
+            tox_file_control(m, self->num, filenum, TOX_FILE_CONTROL_CANCEL, &err);
         } else {
             Friends.list[self->num].file_receiver[filenum].active = true;
             ++Friends.list[self->num].active_file_receivers;

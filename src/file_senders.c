@@ -175,13 +175,12 @@ void reset_file_sender_queue(void)
 
 /* set CTRL to -1 if we don't want to send a control signal.
    set msg to NULL if we don't want to display a message */
-void close_file_sender(ToxWindow *self, Tox *m, int i, const char *msg, int CTRL, int filenum, int32_t friendnum)
+void close_file_sender(ToxWindow *self, Tox *m, int i, const char *msg, int filenum, int32_t friendnum)
 {
     if (msg != NULL)
         line_info_add(self, NULL, NULL, NULL, SYS_MSG, 0, 0, "%s", msg);
 
-    if (CTRL > 0)
-        tox_file_send_control(m, friendnum, 0, filenum, CTRL, 0, 0);
+    tox_file_control(m, friendnum, filenum, TOX_FILE_CONTROL_CANCEL, NULL);
 
     fclose(file_senders[i].file);
     memset(&file_senders[i], 0, sizeof(FileSender));
@@ -197,8 +196,8 @@ void close_all_file_senders(Tox *m)
     for (i = 0; i < max_file_senders_index; ++i) {
         if (file_senders[i].active) {
             fclose(file_senders[i].file);
-            tox_file_send_control(m, file_senders[i].friendnum, 0, file_senders[i].filenum,
-                                  TOX_FILECONTROL_KILL, 0, 0);
+            tox_file_control(m, file_senders[i].friendnum, file_senders[i].filenum,
+                                  TOX_FILE_CONTROL_CANCEL, NULL);
             memset(&file_senders[i], 0, sizeof(FileSender));
         }
 
@@ -224,12 +223,12 @@ static void send_file_data(ToxWindow *self, Tox *m, int i, int32_t friendnum, in
         if (file_senders[i].piecelen == 0) {
             if (feof(fp) != 0) {   /* make sure we're really at eof */
                 print_progress_bar(self, i, -1, 100.0);
-                tox_file_send_control(m, friendnum, 0, filenum, TOX_FILECONTROL_FINISHED, 0, 0);
+                tox_file_control(m, friendnum, filenum, TOX_FILE_CONTROL_CANCEL, NULL);
                 file_senders[i].finished = true;
             } else {
                 char msg[MAX_STR_SIZE];
                 snprintf(msg, sizeof(msg), "File transfer for '%s' failed: Read error.", file_senders[i].filename);
-                close_file_sender(self, m, i, msg, TOX_FILECONTROL_KILL, filenum, friendnum);
+                close_file_sender(self, m, i, msg, filenum, friendnum);
                 sound_notify(self, error, NT_NOFOCUS | NT_WNDALERT_2, NULL);
 
                 if (self->active_box != -1)
@@ -263,7 +262,7 @@ void do_file_senders(Tox *m)
 
         /* kill file transfer if chatwindow is closed */
         if (self->chatwin == NULL) {
-            close_file_sender(self, m, i, NULL, TOX_FILECONTROL_KILL, filenum, friendnum);
+            close_file_sender(self, m, i, NULL, filenum, friendnum);
             continue;
         }
 
@@ -272,7 +271,7 @@ void do_file_senders(Tox *m)
             && (!file_senders[i].paused || (file_senders[i].paused && file_senders[i].noconnection))) {
             char msg[MAX_STR_SIZE];
             snprintf(msg, sizeof(msg), "File transfer for '%s' timed out.", filename);
-            close_file_sender(self, m, i, msg, TOX_FILECONTROL_KILL, filenum, friendnum);
+            close_file_sender(self, m, i, msg, filenum, friendnum);
 
             if (self->active_box != -1)
                 box_notify2(self, error, NT_NOFOCUS | NT_WNDALERT_2, self->active_box, "%s", msg);

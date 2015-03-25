@@ -41,8 +41,8 @@ typedef struct {
     bool active;
     bool noconnection;  /* set when the connection has been interrupted */
     bool paused;        /* set when transfer has been explicitly paused */
-    bool finished;      /* set after entire file has been sent but no TOX_FILECONTROL_FINISHED receieved */
-    bool started;       /* set after TOX_FILECONTROL_ACCEPT received */
+    bool finished;      /* set after entire file has been sent but no TOX_FILE_CONTROL_FINISHED receieved */
+    bool started;       /* set after TOX_FILE_CONTROL_RESUME received */
     int filenum;
     char nextpiece[FILE_PIECE_SIZE];
     uint16_t piecelen;
@@ -65,7 +65,7 @@ void print_progress_bar(ToxWindow *self, int idx, int friendnum, double pct_rema
 
 /* set CTRL to -1 if we don't want to send a control signal.
    set msg to NULL if we don't want to display a message */
-void close_file_sender(ToxWindow *self, Tox *m, int i, const char *msg, int CTRL, int filenum, int32_t friendnum);
+void close_file_sender(ToxWindow *self, Tox *m, int i, const char *msg, int filenum, int32_t friendnum);
 
 /* called whenever a file sender is opened or closed */
 void reset_file_sender_queue(void);

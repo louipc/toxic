@@ -28,7 +28,7 @@
 
 /* set CTRL to -1 if we don't want to send a control signal.
    set msg to NULL if we don't want to display a message */
-void chat_close_file_receiver(Tox *m, int filenum, int friendnum, int CTRL);
+void chat_close_file_receiver(Tox *m, int filenum, int friendnum);
 void kill_chat_window(ToxWindow *self, Tox *m);
 ToxWindow new_chat(Tox *m, int32_t friendnum);
 
