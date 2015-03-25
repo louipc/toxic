@@ -1024,7 +1024,8 @@ static void chat_onDraw(ToxWindow *self, Tox *m)
         char statusmsg[TOX_MAX_STATUS_MESSAGE_LENGTH] = {'\0'};
 
         pthread_mutex_lock(&Winthread.lock);
-        int s_len = tox_get_status_message(m, self->num, (uint8_t *) statusmsg, TOX_MAX_STATUS_MESSAGE_LENGTH);
+        tox_friend_get_status_message(m, self->num, (uint8_t *) statusmsg, NULL);
+        size_t s_len = tox_friend_get_status_message_size(m, self->num, NULL);
         pthread_mutex_unlock(&Winthread.lock);
 
         filter_str(statusmsg, s_len);
@@ -1092,7 +1093,9 @@ static void chat_onInit(ToxWindow *self, Tox *m)
     statusbar->is_online = tox_get_friend_connection_status(m, self->num) == 1;
 
     char statusmsg[TOX_MAX_STATUS_MESSAGE_LENGTH];
-    uint16_t s_len = tox_get_status_message(m, self->num, (uint8_t *) statusmsg, TOX_MAX_STATUS_MESSAGE_LENGTH);
+    tox_friend_get_status_message(m, self->num, (uint8_t *) statusmsg, NULL);
+
+    size_t s_len = tox_friend_get_status_message_size(m, self->num, NULL);
     statusmsg[s_len] = '\0';
 
     filter_str(statusmsg, s_len);

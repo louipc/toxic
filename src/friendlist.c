@@ -936,8 +936,8 @@ static void friendlist_onDraw(ToxWindow *self, Tox *m)
                     char statusmsg[TOX_MAX_STATUS_MESSAGE_LENGTH];
 
                     pthread_mutex_lock(&Winthread.lock);
-                    int s_len = tox_get_status_message(m, Friends.list[f].num, (uint8_t *) statusmsg,
-                                                       TOX_MAX_STATUS_MESSAGE_LENGTH);
+                    tox_friend_get_status_message(m, Friends.list[f].num, (uint8_t *) statusmsg, NULL);
+                    size_t s_len = tox_friend_get_status_message_size(m, Friends.list[f].num, NULL);
                     pthread_mutex_unlock(&Winthread.lock);
 
                     filter_str(statusmsg, s_len);
