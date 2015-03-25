@@ -189,7 +189,7 @@ static void chat_onConnectionChange(ToxWindow *self, Tox *m, int32_t num, uint8_
     if (status == 1) { /* Friend goes online */
         statusbar->is_online = true;
         Friends.list[num].is_typing = user_settings->show_typing_other == SHOW_TYPING_ON
-                                      ? tox_get_is_typing(m, num) : 0;
+                                      ? tox_friend_get_typing(m, num, NULL) : false;
         chat_resume_file_transfers(m, num);
 
         msg = "has come online";
