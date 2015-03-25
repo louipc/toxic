@@ -75,7 +75,7 @@ static struct dns3_server_backup {
 
 static struct thread_data {
     ToxWindow *self;
-    char id_bin[TOX_FRIEND_ADDRESS_SIZE];
+    char id_bin[TOX_ADDRESS_SIZE];
     char addr[MAX_STR_SIZE];
     char msg[MAX_STR_SIZE];
     uint8_t busy;

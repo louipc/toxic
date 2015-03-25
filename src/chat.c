@@ -1123,7 +1123,7 @@ static void chat_onInit(ToxWindow *self, Tox *m)
 
     line_info_init(ctx->hst);
 
-    char myid[TOX_FRIEND_ADDRESS_SIZE];
+    char myid[TOX_ADDRESS_SIZE];
     tox_get_address(m, (uint8_t *) myid);
 
     log_enable(nick, myid, Friends.list[self->num].pub_key, ctx->log, LOG_CHAT);

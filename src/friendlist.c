@@ -354,7 +354,7 @@ static void friendlist_onNickChange(ToxWindow *self, Tox *m, int32_t num, const 
 
     /* get data for chatlog renaming */
     char newnamecpy[TOXIC_MAX_NAME_LENGTH + 1];
-    char myid[TOX_FRIEND_ADDRESS_SIZE];
+    char myid[TOX_ADDRESS_SIZE];
     strcpy(newnamecpy, Friends.list[num].name);
     tox_get_address(m, (uint8_t *) myid);
 

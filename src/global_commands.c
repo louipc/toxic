@@ -157,16 +157,16 @@ void cmd_add(WINDOW *window, ToxWindow *self, Tox *m, int argc, char (*argv)[MAX
         snprintf(msg, sizeof(msg), "Hello, my name is %s. Care to Tox?", selfname);
     }
 
-    char id_bin[TOX_FRIEND_ADDRESS_SIZE] = {0};
+    char id_bin[TOX_ADDRESS_SIZE] = {0};
     uint16_t id_len = (uint16_t) strlen(id);
 
     /* try to add tox ID */
-    if (id_len == 2 * TOX_FRIEND_ADDRESS_SIZE) {
+    if (id_len == 2 * TOX_ADDRESS_SIZE) {
         size_t i;
         char xx[3];
         uint32_t x;
 
-        for (i = 0; i < TOX_FRIEND_ADDRESS_SIZE; ++i) {
+        for (i = 0; i < TOX_ADDRESS_SIZE; ++i) {
             xx[0] = id[2 * i];
             xx[1] = id[2 * i + 1];
             xx[2] = '\0';
@@ -383,7 +383,7 @@ void cmd_log(WINDOW *window, ToxWindow *self, Tox *m, int argc, char (*argv)[MAX
     const char *swch = argv[1];
 
     if (!strcmp(swch, "1") || !strcmp(swch, "on")) {
-        char myid[TOX_FRIEND_ADDRESS_SIZE];
+        char myid[TOX_ADDRESS_SIZE];
         tox_get_address(m, (uint8_t *) myid);
 
         if (self->is_chat) {
@@ -415,13 +415,13 @@ void cmd_log(WINDOW *window, ToxWindow *self, Tox *m, int argc, char (*argv)[MAX
 
 void cmd_myid(WINDOW *window, ToxWindow *self, Tox *m, int argc, char (*argv)[MAX_STR_SIZE])
 {
-    char id[TOX_FRIEND_ADDRESS_SIZE * 2 + 1] = {0};
-    char address[TOX_FRIEND_ADDRESS_SIZE];
+    char id[TOX_ADDRESS_SIZE * 2 + 1] = {0};
+    char address[TOX_ADDRESS_SIZE];
     tox_get_address(m, (uint8_t *) address);
 
     size_t i;
 
-    for (i = 0; i < TOX_FRIEND_ADDRESS_SIZE; ++i) {
+    for (i = 0; i < TOX_ADDRESS_SIZE; ++i) {
         char xx[3];
         snprintf(xx, sizeof(xx), "%02X", address[i] & 0xff);
         strcat(id, xx);
