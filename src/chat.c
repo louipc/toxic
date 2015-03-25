@@ -105,14 +105,14 @@ static const char chat_cmd_list[AC_NUM_CHAT_COMMANDS][MAX_CMDNAME_SIZE] = {
 #endif /* AUDIO */
 };
 
-static void set_self_typingstatus(ToxWindow *self, Tox *m, uint8_t is_typing)
+static void set_self_typingstatus(ToxWindow *self, Tox *m, bool is_typing)
 {
     if (user_settings->show_typing_self == SHOW_TYPING_OFF)
         return;
 
     ChatContext *ctx = self->chatwin;
 
-    tox_set_user_is_typing(m, self->num, is_typing);
+    tox_self_set_typing(m, self->num, is_typing, NULL);
     ctx->self_is_typing = is_typing;
 }
 
