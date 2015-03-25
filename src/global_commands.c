@@ -92,35 +92,40 @@ void cmd_add_helper(ToxWindow *self, Tox *m, char *id_bin, char *msg)
     TOX_ERR_FRIEND_ADD error;
     int32_t f_num = tox_friend_add(m, (uint8_t *) id_bin, (uint8_t *) msg, (uint16_t) strlen(msg), &error);
 
-    switch (f_num) {
-        case TOX_FAERR_TOOLONG:
+    switch (error) {
+        case TOX_ERR_FRIEND_ADD_TOO_LONG:
             errmsg = "Message is too long.";
             break;
 
-        case TOX_FAERR_NOMESSAGE:
+        case TOX_ERR_FRIEND_ADD_NO_MESSAGE:
             errmsg = "Please add a message to your request.";
             break;
 
-        case TOX_FAERR_OWNKEY:
+        case TOX_ERR_FRIEND_ADD_OWN_KEY:
             errmsg = "That appears to be your own ID.";
             break;
 
-        case TOX_FAERR_ALREADYSENT:
+        case TOX_ERR_FRIEND_ADD_ALREADY_SENT:
             errmsg = "Friend request has already been sent.";
             break;
 
-        case TOX_FAERR_UNKNOWN:
-            errmsg = "Undefined error when adding friend.";
-            break;
-
-        case TOX_FAERR_BADCHECKSUM:
+        case TOX_ERR_FRIEND_ADD_BAD_CHECKSUM:
             errmsg = "Bad checksum in address.";
             break;
 
-        case TOX_FAERR_SETNEWNOSPAM:
+        case TOX_ERR_FRIEND_ADD_SET_NEW_NOSPAM:
             errmsg = "Nospam was different.";
             break;
 
+        case TOX_ERR_FRIEND_ADD_MALLOC:
+            errmsg = "Malloc error.";
+            break;
+
+        case TOX_ERR_FRIEND_ADD_NULL:
+            errmsg = "Message was NULL.";
+            break;
+
+        case TOX_ERR_FRIEND_ADD_OK:
         default:
             errmsg = "Friend request sent.";
             on_friendadded(m, f_num, true);
