@@ -982,19 +982,16 @@ static void chat_onDraw(ToxWindow *self, Tox *m)
         uint8_t status = statusbar->status;
 
         switch (status) {
-            case TOX_USERSTATUS_NONE:
+            case TOX_USER_STATUS_NONE:
                 colour = GREEN;
                 break;
-
-            case TOX_USERSTATUS_AWAY:
+            case TOX_USER_STATUS_AWAY:
                 colour = YELLOW;
                 break;
-
-            case TOX_USERSTATUS_BUSY:
+            case TOX_USER_STATUS_BUSY:
                 colour = RED;
                 break;
-
-            case TOX_USERSTATUS_INVALID:
+            default:
                 colour = MAGENTA;
                 break;
         }

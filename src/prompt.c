@@ -258,22 +258,19 @@ static void prompt_onDraw(ToxWindow *self, Tox *m)
         const char *status_text = "Unknown";
 
         switch (statusbar->status) {
-            case TOX_USERSTATUS_NONE:
+            case TOX_USER_STATUS_NONE:
                 status_text = "Online";
                 colour = GREEN;
                 break;
-
-            case TOX_USERSTATUS_AWAY:
+            case TOX_USER_STATUS_AWAY:
                 status_text = "Away";
                 colour = YELLOW;
                 break;
-
-            case TOX_USERSTATUS_BUSY:
+            case TOX_USER_STATUS_BUSY:
                 status_text = "Busy";
                 colour = RED;
                 break;
-
-            case TOX_USERSTATUS_INVALID:
+            default:
                 status_text = "ERROR";
                 colour = MAGENTA;
                 break;
@@ -406,7 +403,7 @@ void prompt_init_statusbar(ToxWindow *self, Tox *m)
 
     /* Init statusbar info */
     StatusBar *statusbar = self->stb;
-    statusbar->status = TOX_USERSTATUS_NONE;
+    statusbar->status = TOX_USER_STATUS_NONE;
     statusbar->is_online = false;
 
     char nick[TOX_MAX_NAME_LENGTH];

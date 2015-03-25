@@ -503,7 +503,7 @@ int sound_notify(ToxWindow* self, Notification notif, uint64_t flags, int* id_in
     int id = -1;
     control_lock();
 
-    if (self && (!self->stb || self->stb->status != TOX_USERSTATUS_BUSY) && user_settings->alerts == ALERTS_ENABLED)
+    if (self && (!self->stb || self->stb->status != TOX_USER_STATUS_BUSY) && user_settings->alerts == ALERTS_ENABLED)
         id = m_play_sound(notif, flags);
     else if (flags & NT_ALWAYS)
         id = m_play_sound(notif, flags);

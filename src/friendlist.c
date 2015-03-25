@@ -401,7 +401,7 @@ void friendlist_onFriendAdded(ToxWindow *self, Tox *m, int32_t num, bool sort)
         Friends.list[i].active = true;
         Friends.list[i].chatwin = -1;
         Friends.list[i].online = false;
-        Friends.list[i].status = TOX_USERSTATUS_NONE;
+        Friends.list[i].status = TOX_USER_STATUS_NONE;
         Friends.list[i].logging_on = (bool) user_settings->autolog == AUTOLOG_ON;
         tox_get_client_id(m, num, (uint8_t *) Friends.list[i].pub_key);
         update_friend_last_online(i, tox_get_last_online(m, i));
@@ -443,7 +443,7 @@ static void friendlist_add_blocked(Tox *m, int32_t fnum, int32_t bnum)
         Friends.list[i].num = fnum;
         Friends.list[i].active = true;
         Friends.list[i].chatwin = -1;
-        Friends.list[i].status = TOX_USERSTATUS_NONE;
+        Friends.list[i].status = TOX_USER_STATUS_NONE;
         Friends.list[i].logging_on = (bool) user_settings->autolog == AUTOLOG_ON;
         Friends.list[i].namelength = Blocked.list[bnum].namelength;
         update_friend_last_online(i, Blocked.list[bnum].last_on);
@@ -900,19 +900,16 @@ static void friendlist_onDraw(ToxWindow *self, Tox *m)
                 int colour = WHITE;
 
                 switch (status) {
-                    case TOX_USERSTATUS_NONE:
+                    case TOX_USER_STATUS_NONE:
                         colour = GREEN;
                         break;
-
-                    case TOX_USERSTATUS_AWAY:
+                    case TOX_USER_STATUS_AWAY:
                         colour = YELLOW;
                         break;
-
-                    case TOX_USERSTATUS_BUSY:
+                    case TOX_USER_STATUS_BUSY:
                         colour = RED;
                         break;
-
-                    case TOX_USERSTATUS_INVALID:
+                    default:
                         colour = MAGENTA;
                         break;
                 }
