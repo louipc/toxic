@@ -409,7 +409,8 @@ void prompt_init_statusbar(ToxWindow *self, Tox *m)
     char nick[TOX_MAX_NAME_LENGTH];
     char statusmsg[TOX_MAX_STATUS_MESSAGE_LENGTH];
 
-    uint16_t n_len = tox_get_self_name(m, (uint8_t *) nick);
+    tox_self_get_name(m, (uint8_t *) nick);
+    size_t n_len = tox_self_get_name_size(m);
 
     tox_self_get_status_message(m, (uint8_t *) statusmsg);
     size_t s_len = tox_self_get_status_message_size(m);

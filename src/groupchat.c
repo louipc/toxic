@@ -244,7 +244,9 @@ static void groupchat_onGroupMessage(ToxWindow *self, Tox *m, int groupnum, int 
     get_group_nick_truncate(m, nick, peernum, groupnum);
 
     char selfnick[TOX_MAX_NAME_LENGTH];
-    uint16_t sn_len = tox_get_self_name(m, (uint8_t *) selfnick);
+    tox_self_get_name(m, (uint8_t *) selfnick);
+
+    size_t sn_len = tox_self_get_name_size(m);
     selfnick[sn_len] = '\0';
 
     int nick_clr = strcmp(nick, selfnick) == 0 ? GREEN : CYAN;
@@ -283,7 +285,9 @@ static void groupchat_onGroupAction(ToxWindow *self, Tox *m, int groupnum, int p
     get_group_nick_truncate(m, nick, peernum, groupnum);
 
     char selfnick[TOX_MAX_NAME_LENGTH];
-    uint16_t n_len = tox_get_self_name(m, (uint8_t *) selfnick);
+    tox_self_get_name(m, (uint8_t *) selfnick);
+
+    size_t n_len = tox_self_get_name_size(m);
     selfnick[n_len] = '\0';
 
     if (strcasestr(action, selfnick)) {

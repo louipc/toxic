@@ -845,7 +845,9 @@ static void send_action(ToxWindow *self, ChatContext *ctx, Tox *m, char *action)
         return;
 
     char selfname[TOX_MAX_NAME_LENGTH];
-    uint16_t len = tox_get_self_name(m, (uint8_t *) selfname);
+    tox_self_get_name(m, (uint8_t *) selfname);
+
+    size_t len = tox_self_get_name_size(m);
     selfname[len] = '\0';
 
     char timefrmt[TIME_STR_SIZE];
@@ -937,7 +939,9 @@ static void chat_onKey(ToxWindow *self, Tox *m, wint_t key, bool ltr)
             }
         } else if (!string_is_empty(line)) {
             char selfname[TOX_MAX_NAME_LENGTH];
-            uint16_t len = tox_get_self_name(m, (uint8_t *) selfname);
+            tox_self_get_name(m, (uint8_t *) selfname);
+
+            size_t len = tox_self_get_name_size(m);
             selfname[len] = '\0';
 
             char timefrmt[TIME_STR_SIZE];
