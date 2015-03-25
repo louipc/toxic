@@ -721,7 +721,7 @@ static void groupchat_onInit(ToxWindow *self, Tox *m)
 
     if (user_settings->autolog == AUTOLOG_ON) {
         char myid[TOX_ADDRESS_SIZE];
-        tox_get_address(m, (uint8_t *) myid);
+        tox_self_get_address(m, (uint8_t *) myid);
         log_enable(self->name, myid, NULL, ctx->log, LOG_GROUP);
     }
 

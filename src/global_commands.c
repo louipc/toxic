@@ -384,7 +384,7 @@ void cmd_log(WINDOW *window, ToxWindow *self, Tox *m, int argc, char (*argv)[MAX
 
     if (!strcmp(swch, "1") || !strcmp(swch, "on")) {
         char myid[TOX_ADDRESS_SIZE];
-        tox_get_address(m, (uint8_t *) myid);
+        tox_self_get_address(m, (uint8_t *) myid);
 
         if (self->is_chat) {
             Friends.list[self->num].logging_on = true;
@@ -417,7 +417,7 @@ void cmd_myid(WINDOW *window, ToxWindow *self, Tox *m, int argc, char (*argv)[MA
 {
     char id[TOX_ADDRESS_SIZE * 2 + 1] = {0};
     char address[TOX_ADDRESS_SIZE];
-    tox_get_address(m, (uint8_t *) address);
+    tox_self_get_address(m, (uint8_t *) address);
 
     size_t i;
 
