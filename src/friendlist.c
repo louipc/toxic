@@ -403,7 +403,7 @@ void friendlist_onFriendAdded(ToxWindow *self, Tox *m, int32_t num, bool sort)
         Friends.list[i].online = false;
         Friends.list[i].status = TOX_USER_STATUS_NONE;
         Friends.list[i].logging_on = (bool) user_settings->autolog == AUTOLOG_ON;
-        tox_get_client_id(m, num, (uint8_t *) Friends.list[i].pub_key);
+        tox_friend_get_public_key(m, num, (uint8_t *) Friends.list[i].pub_key, NULL);
         update_friend_last_online(i, tox_get_last_online(m, i));
 
         char tempname[TOX_MAX_NAME_LENGTH] = {0};
