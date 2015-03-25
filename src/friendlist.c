@@ -667,7 +667,8 @@ static void unblock_friend(Tox *m, int32_t bnum)
     if (Blocked.num_blocked <= 0)
         return;
 
-    int32_t friendnum = tox_add_friend_norequest(m, (uint8_t *) Blocked.list[bnum].pub_key);
+    TOX_ERR_FRIEND_ADD err;
+    uint32_t friendnum = tox_friend_add_norequest(m, (uint8_t *) Blocked.list[bnum].pub_key, &err);
 
     if (friendnum == -1) {
         line_info_add(prompt, NULL, NULL, NULL, SYS_MSG, 0, 0, "Failed to unblock friend");

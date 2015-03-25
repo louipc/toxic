@@ -62,7 +62,8 @@ void cmd_accept(WINDOW *window, ToxWindow *self, Tox *m, int argc, char (*argv)[
     }
 
     const char *msg;
-    int32_t friendnum = tox_add_friend_norequest(m, FrndRequests.request[req].key);
+    TOX_ERR_FRIEND_ADD err;
+    uint32_t friendnum = tox_friend_add_norequest(m, FrndRequests.request[req].key, &err);
 
     if (friendnum == -1)
         msg = "Failed to add friend.";
