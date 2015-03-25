@@ -1091,7 +1091,7 @@ static void chat_onInit(ToxWindow *self, Tox *m)
     StatusBar *statusbar = self->stb;
 
     statusbar->status = tox_friend_get_status(m, self->num, NULL);
-    statusbar->is_online = tox_get_friend_connection_status(m, self->num) == 1;
+    statusbar->connection = tox_friend_get_connection_status(m, self->num, NULL);
 
     char statusmsg[TOX_MAX_STATUS_MESSAGE_LENGTH];
     tox_friend_get_status_message(m, self->num, (uint8_t *) statusmsg, NULL);

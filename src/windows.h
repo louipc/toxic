@@ -180,6 +180,7 @@ struct StatusBar {
     char nick[TOXIC_MAX_NAME_LENGTH + 1];
     int nick_len;
     TOX_USER_STATUS status;
+    TOX_CONNECTION connection;
     bool is_online;
 };
 
