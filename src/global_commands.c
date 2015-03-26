@@ -566,7 +566,7 @@ void cmd_status(WINDOW *window, ToxWindow *self, Tox *m, int argc, char (*argv)[
         goto finish;
     }
 
-    tox_set_user_status(m, status_kind);
+    tox_self_set_status(m, status_kind);
     prompt_update_status(prompt, status_kind);
 
     if (have_note) {
