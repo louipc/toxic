@@ -143,7 +143,7 @@ struct ToxWindow {
     void(*onPeerTimeout)(ToxWindow *, ToxAv *, int);
     void(*onWriteDevice)(ToxWindow *, Tox *, int, int, const int16_t *, unsigned int, uint8_t, unsigned int);
 
-    int call_idx; /* If in a call will have this index set, otherwise it's -1. 
+    int call_idx; /* If in a call will have this index set, otherwise it's -1.
                    * Don't modify outside av callbacks. */
     int device_selection[2]; /* -1 if not set, if set uses these selections instead of primary device */
 
@@ -151,7 +151,7 @@ struct ToxWindow {
 #endif /* AUDIO */
 
     int active_box; /* For box notify */
-    
+
     char name[TOXIC_MAX_NAME_LENGTH + 1];
     int32_t num;    /* corresponds to friendnumber in chat windows */
     bool active;
@@ -252,7 +252,7 @@ void on_window_resize(void);
 void force_refresh(WINDOW *w);
 ToxWindow *get_window_ptr(int i);
 
-/* refresh inactive windows to prevent scrolling bugs. 
+/* refresh inactive windows to prevent scrolling bugs.
    call at least once per second */
 void refresh_inactive_windows(void);
 

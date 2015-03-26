@@ -264,7 +264,7 @@ bool input_handle(ToxWindow *self, wint_t key, int x, int y, int mx_x, int mx_y)
             break;
     }
 
-    /* TODO: this special case is ugly. 
+    /* TODO: this special case is ugly.
        maybe convert entire function to if/else and make them all customizable keys? */
     if (!match && key == user_settings->key_toggle_peerlist) {
         if (self->is_groupchat) {

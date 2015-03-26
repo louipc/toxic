@@ -125,7 +125,7 @@ int yank_buf(ChatContext *ctx)
     return 0;
 }
 
-/* Deletes all characters from line starting at pos and going backwards 
+/* Deletes all characters from line starting at pos and going backwards
    until we find a space or run out of characters.
    Return 0 on success, -1 if nothing to delete */
 int del_word_buf(ChatContext *ctx)

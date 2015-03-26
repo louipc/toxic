@@ -59,7 +59,7 @@ typedef struct {
    Assumes progline is of size MAX_STR_SIZE */
 void prep_prog_line(char *progline);
 
-/* prints a progress bar for file transfers. 
+/* prints a progress bar for file transfers.
    if friendnum is -1 we're sending the file, otherwise we're receiving.  */
 void print_progress_bar(ToxWindow *self, int idx, int friendnum, double pct_remain);
 

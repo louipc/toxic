@@ -199,9 +199,9 @@ int valid_nick(const char *nick)
 
     for (i = 0; nick[i]; ++i) {
         if ((nick[i] == ' ' && nick[i + 1] == ' ')
-            || nick[i] == '/' 
-            || nick[i] == '\n' 
-            || nick[i] == '\t' 
+            || nick[i] == '/'
+            || nick[i] == '\n'
+            || nick[i] == '\t'
             || nick[i] == '\v'
             || nick[i] == '\r')
 
@@ -372,7 +372,7 @@ off_t file_size(const char *path)
     return st.st_size;
 }
 
-/* compares the first size bytes of fp to signature. 
+/* compares the first size bytes of fp to signature.
    Returns 0 if they are the same, 1 if they differ, and -1 on error.
 
    On success this function will seek back to the beginning of fp */

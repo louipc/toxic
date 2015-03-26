@@ -252,7 +252,7 @@ static void groupchat_onGroupMessage(ToxWindow *self, Tox *m, int groupnum, int 
     /* Only play sound if mentioned by someone else */
     if (strcasestr(msg, selfnick) && strcmp(selfnick, nick)) {
         sound_notify(self, generic_message, NT_WNDALERT_0, NULL);
-                
+
         if (self->active_box != -1)
             box_silent_notify2(self, NT_NOFOCUS, self->active_box, "%s %s", nick, msg);
         else
@@ -288,7 +288,7 @@ static void groupchat_onGroupAction(ToxWindow *self, Tox *m, int groupnum, int p
 
     if (strcasestr(action, selfnick)) {
         sound_notify(self, generic_message, NT_WNDALERT_0, NULL);
-        
+
         if (self->active_box != -1)
             box_silent_notify2(self, NT_NOFOCUS, self->active_box, "* %s %s", nick, action );
         else
@@ -366,7 +366,7 @@ static void copy_peernames(int gnum, uint8_t peerlist[][TOX_MAX_NAME_LENGTH], ui
             groupchats[gnum].peer_names[i * N + n_len] = '\0';
             groupchats[gnum].peer_name_lengths[i] = n_len;
             filter_str((char *) &groupchats[gnum].peer_names[i * N], n_len);
-        } 
+        }
     }
 
     memcpy(groupchats[gnum].oldpeer_names, groupchats[gnum].peer_names, N * npeers);
@@ -579,7 +579,7 @@ static void groupchat_onKey(ToxWindow *self, Tox *m, wint_t key, bool ltr)
 
             /* TODO: make this not suck */
             if (ctx->line[0] != L'/' || wcscmp(ctx->line, L"/me") == 0) {
-                diff = complete_line(self, groupchats[self->num].peer_names, groupchats[self->num].num_peers, 
+                diff = complete_line(self, groupchats[self->num].peer_names, groupchats[self->num].num_peers,
                                      TOX_MAX_NAME_LENGTH);
             } else if (wcsncmp(ctx->line, L"/avatar \"", wcslen(L"/avatar \"")) == 0) {
                 diff = dir_match(self, m, ctx->line, L"/avatar");
@@ -733,7 +733,7 @@ static void groupchat_onInit(ToxWindow *self, Tox *m)
 
 
 #ifdef AUDIO
-static int group_audio_open_out_device(int groupnum) 
+static int group_audio_open_out_device(int groupnum)
 {
     char dname[MAX_STR_SIZE];
     get_primary_device_name(output, dname, sizeof(dname));
@@ -821,13 +821,13 @@ static int group_audio_write(int peernum, int groupnum, const int16_t *pcm, unsi
     ALint state;
     alGetSourcei(groupchats[groupnum].audio.source, AL_SOURCE_STATE, &state);
 
-    if (state != AL_PLAYING) 
+    if (state != AL_PLAYING)
         alSourcePlay(groupchats[groupnum].audio.source);
 
     return 0;
 }
 
-static void groupchat_onWriteDevice(ToxWindow *self, Tox *m, int groupnum, int peernum, const int16_t *pcm, 
+static void groupchat_onWriteDevice(ToxWindow *self, Tox *m, int groupnum, int peernum, const int16_t *pcm,
                                     unsigned int samples, uint8_t channels, unsigned int sample_rate)
 {
     return;

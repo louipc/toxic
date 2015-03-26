@@ -28,7 +28,7 @@
 typedef enum {
     DT_plain,
     DT_file_list
-} 
+}
 DropType;
 
 typedef void (*drop_callback) (const char*, DropType);

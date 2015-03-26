@@ -53,7 +53,7 @@ void prep_prog_line(char *progline)
     strcat(progline, "] 0%");
 }
 
-/* prints a progress bar for file transfers. 
+/* prints a progress bar for file transfers.
    if friendnum is -1 we're sending the file, otherwise we're receiving.  */
 void print_progress_bar(ToxWindow *self, int idx, int friendnum, double pct_done)
 {
@@ -177,9 +177,9 @@ void reset_file_sender_queue(void)
    set msg to NULL if we don't want to display a message */
 void close_file_sender(ToxWindow *self, Tox *m, int i, const char *msg, int CTRL, int filenum, int32_t friendnum)
 {
-    if (msg != NULL) 
+    if (msg != NULL)
         line_info_add(self, NULL, NULL, NULL, SYS_MSG, 0, 0, "%s", msg);
-    
+
     if (CTRL > 0)
         tox_file_send_control(m, friendnum, 0, filenum, CTRL, 0, 0);
 
@@ -216,7 +216,7 @@ static void send_file_data(ToxWindow *self, Tox *m, int i, int32_t friendnum, in
             return;
 
         file_senders[i].timestamp = get_unix_time();
-        file_senders[i].bps += file_senders[i].piecelen;            
+        file_senders[i].bps += file_senders[i].piecelen;
         file_senders[i].piecelen = fread(file_senders[i].nextpiece, 1,
                                          tox_file_data_size(m, friendnum), fp);
 
@@ -273,7 +273,7 @@ void do_file_senders(Tox *m)
             char msg[MAX_STR_SIZE];
             snprintf(msg, sizeof(msg), "File transfer for '%s' timed out.", filename);
             close_file_sender(self, m, i, msg, TOX_FILECONTROL_KILL, filenum, friendnum);
-            
+
             if (self->active_box != -1)
                 box_notify2(self, error, NT_NOFOCUS | NT_WNDALERT_2, self->active_box, "%s", msg);
             else

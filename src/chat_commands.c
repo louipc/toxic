@@ -58,7 +58,7 @@ void cmd_cancelfile(WINDOW *window, ToxWindow *self, Tox *m, int argc, char (*ar
     if (strcasecmp(inoutstr, "in") == 0) {    /* cancel an incoming file transfer */
         if (!Friends.list[self->num].file_receiver[filenum].active) {
             line_info_add(self, NULL, NULL, NULL, SYS_MSG, 0, 0, "Invalid file ID.");
-            return;  
+            return;
         }
 
         const char *filepath = Friends.list[self->num].file_receiver[filenum].filename;
@@ -80,7 +80,7 @@ void cmd_cancelfile(WINDOW *window, ToxWindow *self, Tox *m, int argc, char (*ar
 
         if (!match) {
             line_info_add(self, NULL, NULL, NULL, SYS_MSG, 0, 0, "Invalid file ID.");
-            return;  
+            return;
         }
 
         const char *filename = file_senders[i].filename;
@@ -272,7 +272,7 @@ void cmd_sendfile(WINDOW *window, ToxWindow *self, Tox *m, int argc, char (*argv
 
             char sizestr[32];
             bytes_convert_str(sizestr, sizeof(sizestr), filesize);
-            line_info_add(self, NULL, NULL, NULL, SYS_MSG, 0, 0, 
+            line_info_add(self, NULL, NULL, NULL, SYS_MSG, 0, 0,
                           "Sending file [%d]: '%s' (%s)", filenum, filename, sizestr);
 
             ++num_active_file_senders;

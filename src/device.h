@@ -22,7 +22,7 @@
 
 /*
  * You can have multiple sources (Input devices) but only one output device.
- * Pass buffers to output device via write(); 
+ * Pass buffers to output device via write();
  * Read from running input device(s) via select()/callback combo.
  */
 

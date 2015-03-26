@@ -529,7 +529,7 @@ void draw_active_window(Tox *m)
     }
 }
 
-/* refresh inactive windows to prevent scrolling bugs. 
+/* refresh inactive windows to prevent scrolling bugs.
    call at least once per second */
 void refresh_inactive_windows(void)
 {
