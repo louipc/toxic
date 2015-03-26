@@ -379,7 +379,7 @@ static int load_nodelist(const char *filename)
 
 int init_connection_helper(Tox *m, int line)
 {
-    return tox_bootstrap_from_address(m, toxNodes.nodes[line], toxNodes.ports[line], (uint8_t *) toxNodes.keys[line]);
+    return tox_bootstrap(m, toxNodes.nodes[line], toxNodes.ports[line], (uint8_t *) toxNodes.keys[line], NULL);
 }
 
 /* Connects to a random DHT node listed in the DHTnodes file
