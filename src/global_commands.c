@@ -203,7 +203,7 @@ void cmd_avatar(WINDOW *window, ToxWindow *self, Tox *m, int argc, char (*argv)[
 
     /* turns the avatar off */
     if (strlen(argv[1]) < 3) {
-        tox_unset_avatar(m);
+        /* NOCOMMIT: Ignore file transfer requests if TOX_FILE_KIND_AVATAR */
         line_info_add(self, NULL, NULL, NULL, SYS_MSG, 0, 0, "No avatar set.");
         return;
     }
@@ -226,10 +226,7 @@ void cmd_avatar(WINDOW *window, ToxWindow *self, Tox *m, int argc, char (*argv)[
         return;
     }
 
-    if (sz > TOX_AVATAR_MAX_DATA_LENGTH) {
-        line_info_add(self, NULL, NULL, NULL, SYS_MSG, 0, 0, "Failed to set avatar: File is too large.");
-        return;
-    }
+    /* Check for arbitrary avatar max size, and exit with message if needed */
 
     FILE *fp = fopen(path, "rb");
 
@@ -257,9 +254,6 @@ void cmd_avatar(WINDOW *window, ToxWindow *self, Tox *m, int argc, char (*argv)[
         line_info_add(self, NULL, NULL, NULL, SYS_MSG, 0, 0, "Failed to set avatar: Read fail.");
         return;
     }
-
-    if (tox_set_avatar(m, TOX_AVATAR_FORMAT_PNG, (const uint8_t *) avatar, (uint32_t) sz) == -1)
-        line_info_add(self, NULL, NULL, NULL, SYS_MSG, 0, 0, "Failed to set avatar: Core error.");
 
     char filename[MAX_STR_SIZE];
     get_file_name(filename, sizeof(filename), path);
