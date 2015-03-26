@@ -261,10 +261,10 @@ static Tox *init_tox(void)
     tox_opts.udp_enabled = !arg_opts.force_tcp;
     tox_opts.proxy_type = arg_opts.proxy_type;
 
-    if (tox_opts.proxy_type != TOX_PROXY_NONE) {
+    if (tox_opts.proxy_type != TOX_PROXY_TYPE_NONE) {
         tox_opts.proxy_port = arg_opts.proxy_port;
         snprintf(tox_opts.proxy_address, sizeof(tox_opts.proxy_address), "%s", arg_opts.proxy_address);
-        const char *ps = tox_opts.proxy_type == TOX_PROXY_SOCKS5 ? "SOCKS5" : "HTTP";
+        const char *ps = tox_opts.proxy_type == TOX_PROXY_TYPE_SOCKS5 ? "SOCKS5" : "HTTP";
 
         char tmp[48];
         snprintf(tmp, sizeof(tmp), "Using %s proxy %s : %d", ps, arg_opts.proxy_address, arg_opts.proxy_port);
@@ -273,7 +273,7 @@ static Tox *init_tox(void)
 
     if (!tox_opts.udp_enabled) {
         queue_init_message("UDP disabled");
-    } else if (tox_opts.proxy_type != TOX_PROXY_NONE) {
+    } else if (tox_opts.proxy_type != TOX_PROXY_TYPE_NONE) {
         const char *msg = "WARNING: Using a proxy without disabling UDP may leak your real IP address.";
         queue_init_message("%s", msg);
         msg = "Use the -t option to disable UDP.";
@@ -292,7 +292,7 @@ static Tox *init_tox(void)
     if (!tox_opts.ipv6_enabled)
         queue_init_message("Forcing IPv4 connection");
 
-    if (tox_opts.proxy_type != TOX_PROXY_NONE && m == NULL)
+    if (tox_opts.proxy_type != TOX_PROXY_TYPE_NONE && m == NULL)
         exit_toxic_err("Proxy error", FATALERR_PROXY);
 
     if (m == NULL)
@@ -804,7 +804,7 @@ static void set_default_opts(void)
     memset(&arg_opts, 0, sizeof(struct arg_opts));
 
     /* set any non-zero defaults here*/
-    arg_opts.proxy_type = TOX_PROXY_NONE;
+    arg_opts.proxy_type = TOX_PROXY_TYPE_NONE;
 }
 
 static void parse_args(int argc, char *argv[])
@@ -890,7 +890,7 @@ static void parse_args(int argc, char *argv[])
                 break;
 
             case 'p':
-                arg_opts.proxy_type = TOX_PROXY_SOCKS5;
+                arg_opts.proxy_type = TOX_PROXY_TYPE_SOCKS5;
                 snprintf(arg_opts.proxy_address, sizeof(arg_opts.proxy_address), "%s", optarg);
 
                 if (++optind > argc || argv[optind-1][0] == '-')
@@ -900,7 +900,7 @@ static void parse_args(int argc, char *argv[])
                 break;
 
             case 'P':
-                arg_opts.proxy_type = TOX_PROXY_HTTP;
+                arg_opts.proxy_type = TOX_PROXY_TYPE_HTTP;
                 snprintf(arg_opts.proxy_address, sizeof(arg_opts.proxy_address), "%s", optarg);
 
                 if (++optind > argc || argv[optind-1][0] == '-')
