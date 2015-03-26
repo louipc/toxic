@@ -318,7 +318,7 @@ static Tox *init_tox(void)
     tox_callback_file_data(m, on_file_data, NULL);
     tox_callback_read_receipt(m, on_read_receipt, NULL);
 
-    tox_set_name(m, (uint8_t *) "Toxic User", strlen("Toxic User"));
+    tox_self_set_name(m, (uint8_t *) "Toxic User", strlen("Toxic User"), NULL);
 
     return m;
 }

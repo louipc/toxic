@@ -466,7 +466,7 @@ void cmd_nick(WINDOW *window, ToxWindow *self, Tox *m, int argc, char (*argv)[MA
     len = MIN(len, TOXIC_MAX_NAME_LENGTH - 1);
     nick[len] = '\0';
 
-    tox_set_name(m, (uint8_t *) nick, (uint16_t) len);
+    tox_self_set_name(m, (uint8_t *) nick, (uint16_t) len, NULL);
     prompt_update_nick(prompt, nick);
 
     store_data(m, DATA_FILE);
