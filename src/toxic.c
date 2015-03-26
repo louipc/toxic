@@ -585,7 +585,7 @@ int store_data(Tox *m, const char *path)
     if (path == NULL)
         return -1;
 
-    int len = user_password.data_is_encrypted ? tox_encrypted_size(m) : tox_size(m);
+    size_t len = user_password.data_is_encrypted ? tox_encrypted_size(m) : tox_get_savedata_size(m);
     char *buf = malloc(len);
 
     if (buf == NULL)
