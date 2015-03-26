@@ -256,9 +256,9 @@ static void print_init_messages(ToxWindow *toxwin)
 
 static Tox *init_tox(void)
 {
-    Tox_Options tox_opts;
-    tox_opts.ipv6enabled = !arg_opts.use_ipv4;
-    tox_opts.udp_disabled = arg_opts.force_tcp;
+    struct Tox_Options tox_opts;
+    tox_opts.ipv6_enabled = !arg_opts.use_ipv4;
+    tox_opts.udp_enabled = !arg_opts.force_tcp;
     tox_opts.proxy_type = arg_opts.proxy_type;
 
     if (tox_opts.proxy_type != TOX_PROXY_NONE) {
@@ -271,7 +271,7 @@ static Tox *init_tox(void)
         queue_init_message("%s", tmp);
     }
 
-    if (tox_opts.udp_disabled) {
+    if (!tox_opts.udp_enabled) {
         queue_init_message("UDP disabled");
     } else if (tox_opts.proxy_type != TOX_PROXY_NONE) {
         const char *msg = "WARNING: Using a proxy without disabling UDP may leak your real IP address.";
@@ -283,13 +283,13 @@ static Tox *init_tox(void)
     /* Init core */
     Tox *m = tox_new(&tox_opts);
 
-    if (tox_opts.ipv6enabled && m == NULL) {
+    if (tox_opts.ipv6_enabled && m == NULL) {
         queue_init_message("IPv6 failed to initialize");
-        tox_opts.ipv6enabled = 0;
+        tox_opts.ipv6_enabled = 0;
         m = tox_new(&tox_opts);
     }
 
-    if (!tox_opts.ipv6enabled)
+    if (!tox_opts.ipv6_enabled)
         queue_init_message("Forcing IPv4 connection");
 
     if (tox_opts.proxy_type != TOX_PROXY_NONE && m == NULL)
