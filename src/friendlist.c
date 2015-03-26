@@ -530,7 +530,7 @@ static void delete_friend(Tox *m, int32_t f_num)
     if (Friends.list[f_num].group_invite.key != NULL)
         free(Friends.list[f_num].group_invite.key);
 
-    tox_del_friend(m, f_num);
+    tox_friend_delete(m, f_num, NULL);
     memset(&Friends.list[f_num], 0, sizeof(ToxicFriend));
 
     int i;
