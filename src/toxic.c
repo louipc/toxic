@@ -281,12 +281,13 @@ static Tox *init_tox(void)
     }
 
     /* Init core */
-    Tox *m = tox_new(&tox_opts);
+    TOX_ERR_NEW err;
+    Tox *m = tox_new(&tox_opts,0,0,&err);
 
     if (tox_opts.ipv6_enabled && m == NULL) {
         queue_init_message("IPv6 failed to initialize");
         tox_opts.ipv6_enabled = 0;
-        m = tox_new(&tox_opts);
+        m = tox_new(&tox_opts,0,0,&err);
     }
 
     if (!tox_opts.ipv6_enabled)
