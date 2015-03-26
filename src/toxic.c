@@ -597,7 +597,7 @@ int store_data(Tox *m, const char *path)
             return -1;
         }
     } else {
-        tox_save(m, (uint8_t *) buf);
+        tox_get_savedata(m, (uint8_t *) buf);
     }
 
     FILE *fd = fopen(path, "wb");
