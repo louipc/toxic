@@ -212,9 +212,7 @@ static void send_file_data(ToxWindow *self, Tox *m, int i, int32_t friendnum, in
     FILE *fp = file_senders[i].file;
 
     while (true) {
-        if (tox_file_send_data(m, friendnum, filenum, (uint8_t *) file_senders[i].nextpiece,
-                               file_senders[i].piecelen) == -1)
-            return;
+        /* WIP: tox_file_send_data */
 
         file_senders[i].timestamp = get_unix_time();
         file_senders[i].bps += file_senders[i].piecelen;
