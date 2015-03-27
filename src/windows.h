@@ -125,7 +125,7 @@ struct ToxWindow {
     void(*onFileSendRequest)(ToxWindow *, Tox *, int32_t, uint8_t, uint64_t, const char *, uint16_t);
     void(*onFileControl)(ToxWindow *, Tox *, int32_t, uint8_t, uint8_t, uint8_t, const char *, uint16_t);
     void(*onFileData)(ToxWindow *, Tox *, int32_t, uint8_t, const char *, uint16_t);
-    void(*onTypingChange)(ToxWindow *, Tox *, int32_t, uint8_t);
+    void(*onTypingChange)(ToxWindow *, Tox *, uint32_t, bool);
     void(*onReadReceipt)(ToxWindow *, Tox *, int32_t, uint32_t);
 
 #ifdef AUDIO

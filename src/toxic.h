@@ -116,7 +116,7 @@ void on_file_sendrequest(Tox *m, int32_t friendnumber, uint8_t filenumber, uint6
 void on_file_control(Tox *m, int32_t friendnumber, uint8_t receive_send, uint8_t filenumber, uint8_t control_type,
                      const uint8_t *data, uint16_t length, void *userdata);
 void on_file_data(Tox *m, int32_t friendnumber, uint8_t filenumber, const uint8_t *data, uint16_t length, void *userdata);
-void on_typing_change(Tox *m, int32_t friendnumber, uint8_t is_typing, void *userdata);
+void on_typing_change(Tox *m, uint32_t friendnumber, bool is_typing, void *userdata);
 void on_read_receipt(Tox *m, int32_t, uint32_t, void *userdata);
 
 #ifdef AUDIO

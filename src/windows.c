@@ -70,7 +70,7 @@ void on_connectionchange(Tox *m, uint32_t friendnumber, TOX_CONNECTION connectio
     }
 }
 
-void on_typing_change(Tox *m, int32_t friendnumber, uint8_t is_typing, void *userdata)
+void on_typing_change(Tox *m, uint32_t friendnumber, bool is_typing, void *userdata)
 {
     if (user_settings->show_typing_other == SHOW_TYPING_OFF)
         return;
