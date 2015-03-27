@@ -323,7 +323,7 @@ static void mplex_timer_handler (Tox *m)
     int detached = mplex_is_detached ();
 
     pthread_mutex_lock (&Winthread.lock);
-    current_status = tox_get_self_user_status (m);
+    current_status = tox_self_get_status (m);
     pthread_mutex_unlock (&Winthread.lock);
 
     if (auto_away_active && current_status == TOX_USER_STATUS_AWAY && !detached)
