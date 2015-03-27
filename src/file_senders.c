@@ -111,7 +111,8 @@ static void refresh_recv_prog(Tox *m)
                 continue;
 
             int filenum = Friends.list[fnum].file_receiver[j].filenum;
-            double remain = (double) tox_file_data_remaining(m, fnum, filenum, 1);
+            /* WIP: tox_file_data_remaining */
+            double remain = 0;
 
             /* must be called once per second */
             if (timed_out(Friends.list[fnum].file_receiver[filenum].last_progress, curtime, 1)) {
@@ -137,7 +138,8 @@ static void refresh_sender_prog(Tox *m)
 
         int filenum = file_senders[i].filenum;
         int32_t friendnum = file_senders[i].friendnum;
-        double remain = (double) tox_file_data_remaining(m, friendnum, filenum, 0);
+        /* WIP: tox_file_data_remaining */
+        double remain = (double) 0;
 
         /* must be called once per second */
         if (timed_out(file_senders[i].last_progress, curtime, 1)) {
