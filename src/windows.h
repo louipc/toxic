@@ -111,7 +111,7 @@ struct ToxWindow {
     void(*onInit)(ToxWindow *, Tox *);
     void(*onFriendRequest)(ToxWindow *, Tox *, const char *, const char *, uint16_t);
     void(*onFriendAdded)(ToxWindow *, Tox *, int32_t, bool);
-    void(*onConnectionChange)(ToxWindow *, Tox *, int32_t, uint8_t);
+    void(*onConnectionChange)(ToxWindow *, Tox *, uint32_t, TOX_CONNECTION);
     void(*onMessage)(ToxWindow *, Tox *, int32_t, const char *, uint16_t);
     void(*onNickChange)(ToxWindow *, Tox *, int32_t, const char *, uint16_t);
     void(*onStatusChange)(ToxWindow *, Tox *, int32_t, uint8_t);

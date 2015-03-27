@@ -60,7 +60,7 @@ void on_request(Tox *m, const uint8_t *public_key, const uint8_t *data, uint16_t
     }
 }
 
-void on_connectionchange(Tox *m, int32_t friendnumber, uint8_t status, void *userdata)
+void on_connectionchange(Tox *m, uint32_t friendnumber, TOX_CONNECTION connection_status, void *userdata)
 {
     int i;
 
