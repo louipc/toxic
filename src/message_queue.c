@@ -150,7 +150,7 @@ void cqueue_try_send(ToxWindow *self, Tox *m)
     if (msg->type == OUT_MSG)
         receipt = tox_friend_send_message(m, self->num, TOX_MESSAGE_TYPE_NORMAL, (uint8_t *) msg->message, msg->len, NULL);
     else
-        receipt = tox_send_action(m, self->num, (uint8_t *) msg->message, msg->len, NULL);
+        receipt = tox_friend_send_message(m, self->num, TOX_MESSAGE_TYPE_ACTION, (uint8_t *) msg->message, msg->len, NULL);
 
     msg->last_send_try = curtime;
     msg->receipt = receipt;
