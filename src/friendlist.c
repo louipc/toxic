@@ -861,7 +861,7 @@ static void friendlist_onDraw(ToxWindow *self, Tox *m)
     struct tm cur_loc_tm = *localtime((const time_t *) &cur_time);
 
     pthread_mutex_lock(&Winthread.lock);
-    int nf = tox_get_num_online_friends(m);
+    int nf = 0; /* WIP: tox_get_num_online_friends */
     pthread_mutex_unlock(&Winthread.lock);
 
     wattron(self->window, A_BOLD);
