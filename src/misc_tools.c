@@ -265,9 +265,10 @@ void str_to_lower(char *str)
    Returns nick len */
 int get_nick_truncate(Tox *m, char *buf, int friendnum)
 {
-    int len = tox_get_name(m, friendnum, (uint8_t *) buf);
+    bool test = tox_friend_get_name(m, friendnum, (uint8_t *) buf, NULL);
+    int len = tox_friend_get_name_size(m, friendnum, NULL);
 
-    if (len == -1) {
+    if (!test) {
         strcpy(buf, UNKNOWN_NAME);
         len = strlen(UNKNOWN_NAME);
     }
