@@ -247,7 +247,7 @@ void cmd_sendfile(WINDOW *window, ToxWindow *self, Tox *m, int argc, char (*argv
     char filename[MAX_STR_SIZE] = {0};
     get_file_name(filename, sizeof(filename), path);
     int namelen = strlen(filename);
-    int filenum = tox_new_file_sender(m, self->num, filesize, (const uint8_t *) filename, namelen);
+    uint32_t filenum = tox_file_send(m, self->num, TOX_FILE_KIND_DATA, filesize, (const uint8_t *) filename, namelen, NULL);
 
     if (filenum == -1) {
         line_info_add(self, NULL, NULL, NULL, SYS_MSG, 0, 0, "Error sending file.");
