@@ -139,7 +139,7 @@ void on_statusmessagechange(Tox *m, int32_t friendnumber, const uint8_t *string,
     }
 }
 
-void on_statuschange(Tox *m, int32_t friendnumber, uint8_t status, void *userdata)
+void on_statuschange(Tox *m, uint32_t friendnumber, TOX_USER_STATUS status, void *userdata)
 {
     int i;
 
