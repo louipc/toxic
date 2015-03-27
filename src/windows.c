@@ -109,7 +109,7 @@ void on_action(Tox *m, int32_t friendnumber, const uint8_t *string, uint16_t len
     }
 }
 
-void on_nickchange(Tox *m, int32_t friendnumber, const uint8_t *string, uint16_t length, void *userdata)
+void on_nickchange(Tox *m, uint32_t friendnumber, const uint8_t *string, size_t length, void *userdata)
 {
     char nick[TOXIC_MAX_NAME_LENGTH + 1];
     length = copy_tox_str(nick, sizeof(nick), (const char *) string, length);
