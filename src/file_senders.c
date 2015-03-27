@@ -216,8 +216,7 @@ static void send_file_data(ToxWindow *self, Tox *m, int i, int32_t friendnum, in
 
         file_senders[i].timestamp = get_unix_time();
         file_senders[i].bps += file_senders[i].piecelen;
-        file_senders[i].piecelen = fread(file_senders[i].nextpiece, 1,
-                                         tox_file_data_size(m, friendnum), fp);
+        file_senders[i].piecelen = 0; /* WIP tox_file_data_size */
 
         /* note: file sender is closed in chat_onFileControl callback after receiving reply */
         if (file_senders[i].piecelen == 0) {
