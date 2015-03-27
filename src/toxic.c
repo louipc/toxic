@@ -442,7 +442,7 @@ static void do_connection(Tox *m, ToxWindow *prompt)
     static bool was_connected = false;
     static uint64_t last_conn_try = 0;
     uint64_t curtime = get_unix_time();
-    bool is_connected = tox_isconnected(m);
+    bool is_connected = tox_self_get_connection_status(m) != TOX_CONNECTION_NONE ? true: false;
 
     if (was_connected && is_connected)
         return;
