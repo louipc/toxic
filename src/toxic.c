@@ -308,6 +308,7 @@ static Tox *init_tox(void)
     tox_callback_friend_status(m, on_statuschange, NULL);
     tox_callback_friend_status_message(m, on_statusmessagechange, NULL);
     tox_callback_friend_action(m, on_action, NULL);
+    tox_callback_friend_read_receipt(m, on_read_receipt, NULL);
     tox_callback_group_invite(m, on_groupinvite, NULL);
     tox_callback_group_message(m, on_groupmessage, NULL);
     tox_callback_group_action(m, on_groupaction, NULL);
@@ -316,7 +317,6 @@ static Tox *init_tox(void)
     tox_callback_file_send_request(m, on_file_sendrequest, NULL);
     tox_callback_file_control(m, on_file_control, NULL);
     tox_callback_file_data(m, on_file_data, NULL);
-    tox_callback_read_receipt(m, on_read_receipt, NULL);
 
     tox_self_set_name(m, (uint8_t *) "Toxic User", strlen("Toxic User"), NULL);
 
