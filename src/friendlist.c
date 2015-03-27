@@ -387,7 +387,7 @@ void friendlist_onFriendAdded(ToxWindow *self, Tox *m, int32_t num, bool sort)
         return;
 
 
-    Friends.num_friends = tox_count_friendlist(m);
+    Friends.num_friends = tox_self_get_friend_list_size(m);
     realloc_friends(Friends.max_idx + 1);
     memset(&Friends.list[Friends.max_idx], 0, sizeof(ToxicFriend));
 
@@ -430,7 +430,7 @@ void friendlist_onFriendAdded(ToxWindow *self, Tox *m, int32_t num, bool sort)
 /* puts blocked friend back in friendlist. fnum is new friend number, bnum is blocked number */
 static void friendlist_add_blocked(Tox *m, int32_t fnum, int32_t bnum)
 {
-    Friends.num_friends = tox_count_friendlist(m);
+    Friends.num_friends = tox_self_get_friend_list_size(m);
     realloc_friends(Friends.max_idx + 1);
     memset(&Friends.list[Friends.max_idx], 0, sizeof(ToxicFriend));
 
@@ -541,7 +541,7 @@ static void delete_friend(Tox *m, int32_t f_num)
     }
 
     Friends.max_idx = i;
-    Friends.num_friends = tox_count_friendlist(m);
+    Friends.num_friends = tox_self_get_friend_list_size(m);
     realloc_friends(i);
 
     /* make sure num_selected stays within Friends.num_friends range */
