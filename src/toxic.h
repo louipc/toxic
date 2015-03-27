@@ -104,7 +104,7 @@ void on_message(Tox *m, int32_t friendnumber, const uint8_t *string, uint16_t le
 void on_action(Tox *m, int32_t friendnumber, const uint8_t *string, uint16_t length, void *userdata);
 void on_nickchange(Tox *m, uint32_t friendnumber, const uint8_t *string, size_t length, void *userdata);
 void on_statuschange(Tox *m, uint32_t friendnumber, TOX_USER_STATUS status, void *userdata);
-void on_statusmessagechange(Tox *m, int32_t friendnumber, const uint8_t *string, uint16_t length, void *userdata);
+void on_statusmessagechange(Tox *m, uint32_t friendnumber, const uint8_t *string, size_t length, void *userdata);
 void on_friendadded(Tox *m, int32_t friendnumber, bool sort);
 void on_groupmessage(Tox *m, int groupnumber, int peernumber, const uint8_t *message, uint16_t length, void *userdata);
 void on_groupaction(Tox *m, int groupnumber, int peernumber, const uint8_t *action, uint16_t length, void *userdata);

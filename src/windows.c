@@ -125,7 +125,7 @@ void on_nickchange(Tox *m, uint32_t friendnumber, const uint8_t *string, size_t 
     store_data(m, DATA_FILE);
 }
 
-void on_statusmessagechange(Tox *m, int32_t friendnumber, const uint8_t *string, uint16_t length, void *userdata)
+void on_statusmessagechange(Tox *m, uint32_t friendnumber, const uint8_t *string, size_t length, void *userdata)
 {
     char msg[TOX_MAX_STATUS_MESSAGE_LENGTH + 1];
     length = copy_tox_str(msg, sizeof(msg), (const char *) string, length);

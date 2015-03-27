@@ -306,7 +306,7 @@ static Tox *init_tox(void)
     tox_callback_friend_message(m, on_message, NULL);
     tox_callback_friend_name(m, on_nickchange, NULL);
     tox_callback_friend_status(m, on_statuschange, NULL);
-    tox_callback_status_message(m, on_statusmessagechange, NULL);
+    tox_callback_friend_status_message(m, on_statusmessagechange, NULL);
     tox_callback_friend_action(m, on_action, NULL);
     tox_callback_group_invite(m, on_groupinvite, NULL);
     tox_callback_group_message(m, on_groupmessage, NULL);

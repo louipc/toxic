@@ -115,7 +115,7 @@ struct ToxWindow {
     void(*onMessage)(ToxWindow *, Tox *, int32_t, const char *, uint16_t);
     void(*onNickChange)(ToxWindow *, Tox *, uint32_t, const char *, size_t);
     void(*onStatusChange)(ToxWindow *, Tox *, uint32_t, TOX_USER_STATUS);
-    void(*onStatusMessageChange)(ToxWindow *, int32_t, const char *, uint16_t);
+    void(*onStatusMessageChange)(ToxWindow *, uint32_t, const char *, size_t);
     void(*onAction)(ToxWindow *, Tox *, int32_t, const char *, uint16_t);
     void(*onGroupMessage)(ToxWindow *, Tox *, int, int, const char *, uint16_t);
     void(*onGroupAction)(ToxWindow *, Tox *, int, int, const char *, uint16_t);
