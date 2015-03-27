@@ -94,6 +94,7 @@ void on_message(Tox *m, uint32_t friendnumber, const uint8_t *string, uint16_t l
         if (windows[i].onMessage != NULL)
             windows[i].onMessage(&windows[i], m, friendnumber, msg, length);
     }
+    /* WIP: call on_action if message is an action */
 }
 
 void on_action(Tox *m, uint32_t friendnumber, const uint8_t *string, uint16_t length, void *userdata)
