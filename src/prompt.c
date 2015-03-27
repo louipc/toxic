@@ -298,7 +298,7 @@ static void prompt_onDraw(ToxWindow *self, Tox *m)
         char statusmsg[TOX_MAX_STATUS_MESSAGE_LENGTH];
 
         pthread_mutex_lock(&Winthread.lock);
-        tox_get_self_status_message(m, (uint8_t *) statusmsg, TOX_MAX_STATUS_MESSAGE_LENGTH);
+        tox_self_get_status_message(m, (uint8_t *) statusmsg);
         pthread_mutex_unlock(&Winthread.lock);
 
         snprintf(statusbar->statusmsg, sizeof(statusbar->statusmsg), "%s", statusmsg);
@@ -413,7 +413,9 @@ void prompt_init_statusbar(ToxWindow *self, Tox *m)
     char statusmsg[TOX_MAX_STATUS_MESSAGE_LENGTH];
 
     uint16_t n_len = tox_get_self_name(m, (uint8_t *) nick);
-    uint16_t s_len = tox_get_self_status_message(m, (uint8_t *) statusmsg, MAX_STR_SIZE);
+
+    tox_self_get_status_message(m, (uint8_t *) statusmsg);
+    size_t s_len = tox_self_get_status_message_size(m);
     uint8_t status = tox_get_self_user_status(m);
 
     nick[n_len] = '\0';

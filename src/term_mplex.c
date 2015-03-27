@@ -339,7 +339,7 @@ static void mplex_timer_handler (Tox *m)
         prev_status = current_status;
         new_status = TOX_USERSTATUS_AWAY;
         pthread_mutex_lock (&Winthread.lock);
-        tox_get_self_status_message (m, (uint8_t*) prev_note, sizeof (prev_note));
+        tox_self_get_status_message (m, (uint8_t*) prev_note);
         pthread_mutex_unlock (&Winthread.lock);
         new_note = user_settings->mplex_away_note;
     }
