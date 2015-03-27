@@ -116,7 +116,7 @@ void prompt_update_statusmessage(ToxWindow *prompt, Tox *m, const char *statusms
     snprintf(statusbar->statusmsg, sizeof(statusbar->statusmsg), "%s", statusmsg);
     int len = strlen(statusbar->statusmsg);
     statusbar->statusmsg_len = len;
-    tox_set_status_message(m, (uint8_t *) statusmsg, (uint64_t) len);
+    tox_self_set_status_message(m, (uint8_t *) statusmsg, (uint64_t) len, NULL);
 }
 
 /* Updates own status in prompt statusbar */
