@@ -263,7 +263,7 @@ static Tox *init_tox(void)
 
     if (tox_opts.proxy_type != TOX_PROXY_TYPE_NONE) {
         tox_opts.proxy_port = arg_opts.proxy_port;
-        snprintf(tox_opts.proxy_address, sizeof(tox_opts.proxy_address), "%s", arg_opts.proxy_address);
+        snprintf(tox_opts.proxy_host, sizeof(tox_opts.proxy_host), "%s", arg_opts.proxy_address);
         const char *ps = tox_opts.proxy_type == TOX_PROXY_TYPE_SOCKS5 ? "SOCKS5" : "HTTP";
 
         char tmp[48];
