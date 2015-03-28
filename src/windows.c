@@ -149,7 +149,7 @@ void on_statuschange(Tox *m, uint32_t friendnumber, TOX_USER_STATUS status, void
     }
 }
 
-void on_friendadded(Tox *m, int32_t friendnumber, bool sort)
+void on_friendadded(Tox *m, uint32_t friendnumber, bool sort)
 {
     int i;
 
