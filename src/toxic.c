@@ -687,8 +687,8 @@ static void load_data(Tox *m, char *path)
                 }
             }
         } else {
-            /* tox_load errors are to be ignored until toxcore is fixed */
-            tox_load(m, (uint8_t *) buf, len);
+            /* WIP: tox_load; tox_new errors are to be ignored until toxcore is fixed */
+            tox_new(m, (uint8_t *) buf, len, NULL);
         }
 
         load_friendlist(m);
