@@ -678,7 +678,7 @@ static void load_data(Tox *m, char *path)
                     continue;
                 }
 
-                if (tox_encrypted_load(m, (uint8_t *) buf, len, (uint8_t *) user_password.pass, pwlen) == 0) {
+                if (tox_encrypted_new(m, (uint8_t *) buf, len, (uint8_t *) user_password.pass, pwlen, NULL) == NULL) {
                     break;
                 } else {
                     system("clear");
