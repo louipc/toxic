@@ -83,7 +83,7 @@ void on_typing_change(Tox *m, uint32_t friendnumber, bool is_typing, void *userd
     }
 }
 
-void on_message(Tox *m, int32_t friendnumber, const uint8_t *string, uint16_t length, void *userdata)
+void on_message(Tox *m, uint32_t friendnumber, const uint8_t *string, uint16_t length, void *userdata)
 {
     char msg[MAX_STR_SIZE + 1];
     length = copy_tox_str(msg, sizeof(msg), (const char *) string, length);
